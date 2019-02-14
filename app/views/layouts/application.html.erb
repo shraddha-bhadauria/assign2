@@ -10,6 +10,21 @@
   </head>
 
   <body>
+
+  <%= render "layouts/header" %>
+  <% if flash[:notice] %>
+    <div id = 'error_explanation' class="notice" style="color:red">
+      <h2>Message</h2>
+      <ul>
+        <li><%= flash[:notice] %></li>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="app-cont">
+
     <%= yield %>
+
+  </section>
   </body>
 </html>

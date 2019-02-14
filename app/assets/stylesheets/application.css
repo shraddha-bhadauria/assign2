@@ -9,7 +9,71 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
+
  *
- *= require_tree .
- *= require_self
+
  */
+
+.page-header{
+    margin:0 auto;
+    background-color:#1a1a1a;
+    color:#FAFAFA;
+    padding:18px 0 18px 0;
+    font-size: 40px;
+    height: 92px;
+}
+.topcorner{
+    position:absolute;
+    top:90px;
+    right:0px;
+}
+.topcorner2{
+    position:absolute;
+    top:90px;
+    right:78px;
+}
+.navbar {
+    min-height: 38px;
+    background-color: #f55e55;
+}
+
+th {
+    background:#b5cfd2;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+
+td {
+    background:#dcddc0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+
+.loginheader{
+    position: relative;
+    height: 20%;
+}
+
+.bt{
+
+    background-color: white;
+    color: black;
+    border-color: black;
+    margin: 5px;
+}
+
+.bt:hover{
+    text-decoration: underline;
+    border-color: black;
+}
+.padding,h1{
+    padding: 2px 0px 0px 10px;
+}
+.input-group{
+    width: 50%;
+}
+
