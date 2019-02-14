@@ -1,9 +1,9 @@
 module SessionsHelper
 
   # Logs in the given user.
-  def log_in(member)
-    session[:member_id] = member.id
-    session[:email]=member.email
+  def log_in(user)
+    session[:user_id] = user.id
+    session[:email]=user.email
   end
 
   # Returns the current logged-in user (if any).

@@ -23,37 +23,27 @@ class SessionsController < ApplicationController
 
     end
 
-    # if params[:session][:state].downcase == "agent"
-    #   user = Agent.find_by(email: params[:session][:email].downcase)
-    #   if user && user.authenticate(params[:session][:password])
-    #     if user.state=="admin"
-    #       flash[:notice] = "Please login as admin"
-    #       redirect_to root_url
-    #     else
-    #       log_in user
-    #       redirect_to :controller => 'cars', :action => 'index'
-    #     end
-    #   else
-    #     flash.now[:notice] = "Invalid email/password combination"
-    #     render 'new'
-    #   end
-    # end
-    #
-    # if params[:session][:state].downcase == "admin"
-    #   user = Agent.find_by(email: params[:session][:email].downcase)
-    #   if user && user.authenticate(params[:session][:password])
-    #     if user.state=="admin"
-    #       flash[:notice] = "Please login as admin"
-    #       redirect_to root_url
-    #     else
-    #       log_in user
-    #       redirect_to :controller => 'cars', :action => 'index'
-    #     end
-    #   else
-    #     flash.now[:notice] = "Invalid email/password combination"
-    #     render 'new'
-    #   end
-    # end
+    if params[:session][:state].downcase == "agent"
+      user = Agent.find_by(email: params[:session][:email].downcase)
+      if user && user.authenticate(params[:session][:password])
+        log_in user
+        redirect_to :controller => 'home', :action => 'index'
+      else
+        flash.now[:notice] = "Invalid email/password combination"
+        render 'new'
+      end
+    end
+
+    if params[:session][:state].downcase == "customer"
+      user = Customer.find_by(email: params[:session][:email].downcase)
+      if user && user.authenticate(params[:session][:password])
+        log_in user
+        redirect_to :controller => 'home', :action => 'index'
+      else
+        flash.now[:notice] = "Invalid email/password combination"
+        render 'new'
+      end
+    end
 
   end
 end
