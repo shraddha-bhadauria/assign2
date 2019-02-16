@@ -3,5 +3,4 @@ class Agent < ApplicationRecord
   validates :name, presence: true
 
   validates :password, presence: true, length: {minimum: 8}
-  validates_length_of :password, :minimum => 6, presence:true
 end

@@ -1,2 +1,38 @@
-<h1>Customers#index</h1>
-<p>Find me in app/views/customers/index.html.erb</p>
+<h1>Listing Customers</h1>
+
+<!--<div class="btn btn-success">-->
+<!--  <%#= link_to 'Profile/History', customer_path(session[:customer_id]), method: :get, :style =>'color:#FFFFFF;'  %></div>-->
+
+<div class="btn btn-success">
+  <%= link_to 'Log Out', logout_path(session[:member_id]), method: :delete, :style =>'color:#FFFFFF;'  %></div>
+
+
+
+<div class = "padding">
+
+  <table>
+    <tr>
+      <th>S. No.</th>
+      <th>Name</th>
+      <th>EMail ID</th>
+    </tr>
+
+    <% id=0 %>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= id+=1 %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.email %></td>
+      </tr>
+    <%end %>
+  </table>
+
+</div>
+
+
+<!--<div class="btn btn-success topcorner2">-->
+<!--  <%#= link_to 'Back', , :style =>'color:#FFFFFF;' %></div>-->
+
+<div class="btn btn-success topcorner">
+  <%= link_to 'Home', 'welcome/index', :style =>'color:#FFFFFF;'%>
+</div>

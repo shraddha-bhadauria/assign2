@@ -1,2 +1,17 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+<h2>Profile</h2>
+<p>
+  <b>Name:</b>
+  <%= @customers.name %>
+</p>
+
+<p>
+  <b>email:</b>
+  <%= @customers.email %>
+</p>
+
+<!--<div class="btn btn-success">-->
+<!--  <%#= link_to 'Edit', edit_customer_path(@customers), :style =>'color:#FFFFFF;' %></div>-->
+
+<!--<div class="btn btn-success topcorner">-->
+<!--  <%#= link_to 'Home', cars_url, :style =>'color:#FFFFFF;'%></div>-->

@@ -12,11 +12,14 @@ class SessionsController < ApplicationController
       render 'new'
     end
 
+
+
     if params[:session][:state].downcase == "admin"
       if params[:session][:email].downcase == "admin@ncsu.edu" && params[:session][:password] == "team"
-        session[:user_id] = 1
+        session[:member_id] = 1
         session[:email]="admin@ncsu.edu"
-        redirect_to :controller => 'welcome', :action => 'index'
+        session[:state] = params[:session][:state].downcase
+        redirect_to :controller => 'options', :action => 'index'
 
       else
         flash.now[:notice] = "Invalid email/password combination"
@@ -26,9 +29,11 @@ class SessionsController < ApplicationController
 
     if params[:session][:state].downcase == "agent"
        user = Agent.find_by(email: params[:session][:email].downcase)
-       if user && user.authenticate(params[:session][:password])
-         log_in user
-         redirect_to :controller => 'welcome', :action => 'index'
+       if user && user.password == params[:session][:password]
+         session[:member_id] = user.id
+         session[:email]= user.password
+         session[:state] = params[:session][:state].downcase
+         redirect_to :controller => 'agentoptions', :action => 'index'
        else
          flash.now[:notice] = "Invalid email/password combination"
          render 'new'
@@ -38,9 +43,11 @@ class SessionsController < ApplicationController
 
     if params[:session][:state].downcase == "customer"
        user = Customer.find_by(email: params[:session][:email].downcase)
-       if user && user.authenticate(params[:session][:password])
-         log_in user
-         redirect_to :controller => 'welcome', :action => 'index'
+       if user && user.password == params[:session][:password]
+         session[:member_id] = user.id
+         session[:email]= user.password
+         session[:state] = params[:session][:state].downcase
+         redirect_to :controller => 'customeroptions', :action => 'index'
        else
          flash.now[:notice] = "Invalid email/password combination"
          render 'new'
