@@ -7,6 +7,17 @@
   <%#= f.hidden_field :customer_id, :value => session[:user_id]%>
   <%#= f.hidden_field :tour_id, :value => session[:user_id]%>
 
+  <% if @bookings.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bookings.errors.count, "error") %> prohibited this member from being saved:</h2>
+      <ul>
+        <% @bookings.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field" align="center">
     <%= f.label :customer %><br />
     <%= f.number_field :customer %>

@@ -20,6 +20,15 @@ class PhotosController < ApplicationController
     end
   end
 
+  def destroy
+    @photo = Photo.find(params[:id])
+    if @photo.destroy
+      flash[:notice] = "Successfully deleted photo!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Error deleting photo!"
+    end
+
   private
 
   #Permitted parameters when creating a photo. This is used for security reasons.
