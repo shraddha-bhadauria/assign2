@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_17_153611) do
+ActiveRecord::Schema.define(version: 2019_02_20_205337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,35 @@ ActiveRecord::Schema.define(version: 2019_02_17_153611) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.integer "bseats"
+    t.integer "bwait_list"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "tour_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["tour_id"], name: "index_photos_on_tour_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -40,5 +63,23 @@ ActiveRecord::Schema.define(version: 2019_02_17_153611) do
     t.index ["customer_id"], name: "index_reviews_on_customer_id"
   end
 
+  create_table "tours", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price"
+    t.date "booking_deadline"
+    t.date "from_date"
+    t.date "to_date"
+    t.text "start_location"
+    t.text "itinerary"
+    t.decimal "contact_agent"
+    t.integer "seats"
+    t.integer "wait_list"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "photos", "tours"
   add_foreign_key "reviews", "customers"
 end

@@ -7,17 +7,19 @@
 
   <table>
     <tr>
-      <th>S. No.</th>
-      <th>Name</th>
-      <th>EMail ID</th>
+      <th>Id</th>
+      <th>Customer id</th>
+      <th>Tour id</th>
+      <th>Booked seats</th>
+      <th>Booked waitlist</th>
     </tr>
 
     <% id=0 %>
-    <% bookings.each do |booking| %>
+    <% @bookings.each do |booking| %>
       <tr>
         <td><%= id+=1 %></td>
-        <td><%= booking.bseats %></td>
-        <td><%= booking.waitlist %></td>
+        <td><%= booking.customer_id %></td>
+        <td><%= booking.tour_id %></td>
         <td><%= booking.bseats %></td>
         <td><%= booking.waitlist %></td>
       </tr>

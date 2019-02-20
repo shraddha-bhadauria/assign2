@@ -9,6 +9,7 @@ one:
   from_date: 2019-02-18
   to_date: 2019-02-18
   start_location: MyText
+  itinerary: MyText
   contact_agent: 
   seats: 1
   wait_list: 1
@@ -23,6 +24,7 @@ two:
   from_date: 2019-02-18
   to_date: 2019-02-18
   start_location: MyText
+  itinerary: MyText
   contact_agent: 
   seats: 1
   wait_list: 1

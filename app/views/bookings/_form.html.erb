@@ -1,0 +1,34 @@
+<h2 align="center">Bookings</h2>
+<%= form_for(@bookings) do |f| %>
+
+  <%#= f.hidden_field :customer_id, :value => 1 %>
+  <%#= f.hidden_field :tour_id, :value => 1 %>
+
+  <%#= f.hidden_field :customer_id, :value => session[:user_id]%>
+  <%#= f.hidden_field :tour_id, :value => session[:user_id]%>
+
+  <div class="field" align="center">
+    <%= f.label :customer %><br />
+    <%= f.number_field :customer %>
+  </div>
+
+  <div class="field" align="center">
+    <%= f.label :tour %><br />
+    <%= f.number_field :tour %>
+  </div>
+
+  <div class="field" align="center">
+    <%= f.label :bseats %><br />
+    <%= f.number_field :bseats %>
+  </div>
+
+  <div class="field" align="center">
+    <%= f.label :email %><br />
+    <%= f.number_field :bwait_list %>
+  </div>
+  <br />
+  <div class="actions" align="center">
+    <%= f.submit "Book" %>
+  </div>
+
+<% end %>
