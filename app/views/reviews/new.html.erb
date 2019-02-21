@@ -1,29 +1,10 @@
 
-
-<h2 align="center">write a review</h2>
-<%= form_for(@reviews) do |f| %>
-  <% if @reviews.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reviews.errors.count, "error") %> prohibited this member from being saved:</h2>
-      <ul>
-        <% @reviews.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= render 'form' %>
+<br />
+<td><% if session[:user_id].nil? %></td>
+    <div class="btn btn-success topcorner2">
+      <%= link_to 'Back', root_url , :style =>'color:#FFFFFF;' %></div>
+  <% else %>
+    <div class="btn btn-success topcorner2">
+      <%= link_to 'Back',welcome_index_path, :style =>'color:#FFFFFF;' %></div>
   <% end %>
-  <div class="field" align="left">
-    <%= f.label :subject %><br />
-    <%= f.text_field :subject %>
-  </div>
-
-  <div class="field" align="left">
-    <%= f.label :body %><br />
-    <%= f.text_area :body, :cols => 30, :rows => 10 %>
-  </div>
-  <div class="actions" align="center">
-    <%= f.submit "Submit" %>
-  </div>
-<% end %>
-
-
