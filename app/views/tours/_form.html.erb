@@ -1,96 +1,86 @@
-
-<h2 align="center">Tour Details</h2>
-<%= form_for(@tours) do |f| %>
-
-
-  <div class="field" align="center">
-    <%= f.label "Name" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Description" %><br />
-    <%= f.text_field :description %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Price" %><br />
-    <%= f.number_field :price %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Booking Deadline" %><br />
-    <%= f.date_field :booking_deadline %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "From Date" %><br />
-    <%= f.date_field :from_date %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "To Date" %><br />
-    <%= f.date_field :to_date %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Start Location" %><br />
-    <%= f.text_field :start_location %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Itenerary" %><br />
-    <%= f.text_field :itinerary %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Contact Agent" %><br />
-    <%= f.number_field :contact_agent %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Seats" %><br />
-    <%= f.number_field :seats %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Waitlist" %><br />
-    <%= f.number_field :wait_list %>
-  </div>
-  <br>
-
-  <div class="field" align="center">
-    <%= f.label "Status" %><br />
-    <%= f.text_field :status %>
-  </div>
-  <br>
-
+<%= form_with(model: @tours, local: true) do |form| %>
   <% if @tours.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+      <h2><%= pluralize(@tours.errors.count, "error") %> prohibited this tour from being saved:</h2>
 
       <ul>
-        <% property.errors.full_messages.each do |message| %>
+        <% @tours.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <br />
-  <div class="actions" align="center">
-    <%= f.submit "Book" %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :booking_date_validity %>
+    <%= form.date_select :booking_date_validity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :valid_start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :valid_end_date %>
+  </div>
+
+ <!-- <div class="field">
+    <%= form.label :starttime %>
+    <%= form.time_select :starttime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :endtime %>
+    <%= form.time_select :endtime %>
+  </div>
+-->
+  <div class="field">
+    <%= form.label :start_location %>
+    <%= form.text_field :start_location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+<!--  <div class="field">
+    <%= form.label :itinerary %>
+    <%= form.text_area :itinerary %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :seats %>
+    <%= form.number_field :seats %>
   </div>
 
 
+
+<div class="actions" align="center">
+  <%= form.submit "Submit" %>
+</div>
+
+  <div class="bt topcorner">
+  <%= link_to 'back', tours_path, :style =>'text-decoration: none;' %></div>
+
 <% end %>
+
+
+
