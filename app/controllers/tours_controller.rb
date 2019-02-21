@@ -1,34 +1,93 @@
 class ToursController < ApplicationController
+
   def index
     @tours=Tour.all
   end
 
-  def new
-    @tours= Tour.new
 
+
+  def new
+
+    @tours= Tour.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tours }
     end
+
+
+
   end
 
   def create
-    @tours = Tour.new(tour_params)
-    # @cars = Car.all
+    @tours = Tour.new(tours_params)
+    #@tours.id =
     respond_to do |format|
       if @tours.save
-        # log_in @tours
-        flash[:success] = "Welcome to the Tour management system!"
-        format.html { redirect_to :controller => 'welcome', :action => 'index', notice: 'Tour was successfully created.' }
-        format.json { render json: @tours, status: :created, location: 'welcome/index' }
+        format.html { redirect_to @tours, notice: 'Tour was successfully created.' }
+        format.json { render :show, status: :created, location: @tours }
       else
-        flash.now[:notice] = "Invalid email/password combination"
-        format.html { render action: "new" }
+        format.html { render :new }
         format.json { render json: @tours.errors, status: :unprocessable_entity }
       end
     end
   end
 
+
+  def update
+    respond_to do |format|
+      if @tours.update(tour_params)
+        format.html { redirect_to @tours, notice: 'Tour was successfully updated.' }
+        format.json { render :show, status: :ok, location: @tours }
+      else
+        format.html { render :edit }
+
+      end
+    end
+  end
+
+
+  def destroy
+    @tours.destroy
+    respond_to do |format|
+      format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  INTEGER_MAX = 2147483647
+  SIZE_MAPPING = {
+      1 => [0, 500],
+      2 => [500, 1500],
+      3 => [1500, 3000],
+      4 => [3000, INTEGER_MAX]
+  }
+  PRICE_MAPPING = {
+      1 => [0, 100000],
+      2 => [100000, 250000],
+      3 => [250000, 500000],
+      4 => [500000, 1000000],
+      5 => [1000000, INTEGER_MAX]
+  }
+
+  def search
+    @sp = params.fetch(:search_params, {})
+    @tours = Tour.all
+    @tours = @tours.where(:size => SIZE_MAPPING[@sp['size'].to_i][0]...SIZE_MAPPING[@sp['size'].to_i][1]) if @sp['size'].present?
+    @tours = @tours.where(['address LIKE ?', "%#{@sp['address']}%"]) if @sp['address'].present? && @sp['address'] != ""
+    @tours = @tours.where(:price => PRICE_MAPPING[@sp['price'].to_i][0]...PRICE_MAPPING[@sp['price'].to_i][1]) if @sp['price'].present?
+  end
+
+  private
+
+  def set_tour
+    @tours = @tours.find(params[:id])
+  end
+
+
+  def tours_params
+    params.fetch(:tour, {})
+    params.require(:tour).permit(:id, :price, :description, :booking_date, :start_date, :end_date, :start_location, :operator_contact, :status)
+end
   def show
     @tours = Tour.find(params[:id])
     respond_to do |format|
@@ -61,9 +120,5 @@ class ToursController < ApplicationController
       format.html { redirect_to tours_url }
       format.json { head :no_content }
     end
-  end
-
-  def tour_params
-    params.require(:tour).permit(:customer_id, :tour_id, :bseats, :bwait_list)
   end
 end
